@@ -481,14 +481,11 @@ public class ContractService extends AbstractService {
                     DEFAULT_GAS_LIMIT, BigInteger.valueOf(initalValue), dpContractAddress).flowable().toObservable();
 
             case "storeb":
-                String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.web3j.abi.datatypes.generated.Uint256(initalValue), new org.web3j.abi.datatypes.Address(dpContractAddress)));
-                return deployRemoteCall(Storeb.class, client, transactionManager, BigInteger.valueOf(0), DEFAULT_GAS_LIMIT, Storeb.BINARY, encodedConstructor).flowable().toObservable();
+                String encodedConstructorB = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.web3j.abi.datatypes.generated.Uint256(initalValue), new org.web3j.abi.datatypes.Address(dpContractAddress)));
+                return deployRemoteCall(Storeb.class, client, transactionManager, BigInteger.valueOf(0), DEFAULT_GAS_LIMIT, Storeb.BINARY, encodedConstructorB).flowable().toObservable();
             case "storec":
-                return Storec.deploy(
-                    client,
-                    transactionManager,
-                    BigInteger.valueOf(0),
-                    DEFAULT_GAS_LIMIT, BigInteger.valueOf(initalValue)).flowable().toObservable();
+                String encodedConstructorC = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.web3j.abi.datatypes.generated.Uint256(initalValue)));
+                return deployRemoteCall(Storec.class, client, transactionManager, BigInteger.valueOf(0), DEFAULT_GAS_LIMIT, Storec.BINARY, encodedConstructorC).flowable().toObservable();
             default:
                 throw new RuntimeException("invalid contract name " + contractName);
         }

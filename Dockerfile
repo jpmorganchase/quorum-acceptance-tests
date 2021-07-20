@@ -1,8 +1,8 @@
 FROM alpine:latest
 
 ARG TERRAFORM_VERSION=0.14.7
-ARG SOLC_VERSION=0.6.0
-ARG GAUGE_VERSION=1.2.1
+ARG SOLC_VERSION=0.6.12
+ARG GAUGE_VERSION=1.3.3
 # To have a consistent run, this must be the same as gauge-java.version in pom.xml
 ARG GAUGE_JAVA_VERSION=0.7.15
 ARG MAVEN_VERSION=3.6.3
