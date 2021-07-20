@@ -527,7 +527,7 @@ public class ContractService extends AbstractService {
             .flatMap(address -> {
                 org.web3j.tx.ClientTransactionManager txManager = vanillaClientTransactionManager(client, address);
                 return ClientReceipt.load(contractAddress, client, txManager, BigInteger.valueOf(0), DEFAULT_GAS_LIMIT)
-                    .deposit(value.toByteArray()).flowable().toObservable();
+                    .deposit(Arrays.copyOf(value.toByteArray(), 32)).flowable().toObservable();
             });
     }
 
@@ -539,9 +539,10 @@ public class ContractService extends AbstractService {
                 address,
                 null,
                 List.of(privacyService.id(target)));
+
             return ClientReceipt.load(contractAddress, client, txManager,
                 BigInteger.valueOf(0),
-                DEFAULT_GAS_LIMIT).deposit(value.toByteArray()).flowable().toObservable();
+                DEFAULT_GAS_LIMIT).deposit(Arrays.copyOf(value.toByteArray(), 32)).flowable().toObservable();
         });
     }
 
