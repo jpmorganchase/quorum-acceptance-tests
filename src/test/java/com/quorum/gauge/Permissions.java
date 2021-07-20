@@ -657,7 +657,7 @@ public class Permissions extends AbstractSpecImplementation {
     }
 
     @Step("Deploy <contractName> smart contract with initial value <initialValue> from a default account in <node> fails with error <error>")
-    public void setupStorecAsPublicDependentContract(String contractName, int initialValue, QuorumNetworkProperty.Node node, String error) {
+    public void setupStorec2AsPublicDependentContract(String contractName, int initialValue, QuorumNetworkProperty.Node node, String error) {
         Contract c = null;
         String exMsg = "";
         try {
@@ -672,7 +672,7 @@ public class Permissions extends AbstractSpecImplementation {
     }
 
     @Step("Deploy <contractName> smart contract with initial value <initialValue> from a default account in <node> until block height reaches <qip714block>")
-    public void setupStorecAsPublicDependentContractUntilBlockHeightReached(String contractName, int initialValue, QuorumNetworkProperty.Node node, int qip714block) {
+    public void setupStorec2AsPublicDependentContractUntilBlockHeightReached(String contractName, int initialValue, QuorumNetworkProperty.Node node, int qip714block) {
         int curBlockHeight = utilService.getCurrentBlockNumber().blockingFirst().getBlockNumber().intValue();
         while (curBlockHeight < qip714block) {
             Contract c = contractService.createGenericStoreContract(node, contractName, initialValue, null, false, null, PrivacyFlag.StandardPrivate).blockingFirst();
