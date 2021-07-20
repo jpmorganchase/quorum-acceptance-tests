@@ -351,11 +351,11 @@ public class ContractService extends AbstractService {
                 case "storeb":
                     switch (methodName.toLowerCase().trim()) {
                         case "getb":
-                            return Storeb.load(contractAddress, client, txManager,
+                            return Storeb2.load(contractAddress, client, txManager,
                                 BigInteger.valueOf(0),
                                 DEFAULT_GAS_LIMIT).getb().send().intValue();
                         case "getc":
-                            return Storeb.load(contractAddress, client, txManager,
+                            return Storeb2.load(contractAddress, client, txManager,
                                 BigInteger.valueOf(0),
                                 DEFAULT_GAS_LIMIT).getc().send().intValue();
                         default:
@@ -364,7 +364,7 @@ public class ContractService extends AbstractService {
                 case "storec":
                     switch (methodName.toLowerCase().trim()) {
                         case "getc":
-                            return Storec.load(contractAddress, client, txManager,
+                            return Storec2.load(contractAddress, client, txManager,
                                 BigInteger.valueOf(0),
                                 DEFAULT_GAS_LIMIT).getc().send().intValue();
                         default:
@@ -423,11 +423,11 @@ public class ContractService extends AbstractService {
                 case "storeb":
                     switch (methodName.toLowerCase().trim()) {
                         case "setb":
-                            return Storeb.load(contractAddress, client, txManager,
+                            return Storeb2.load(contractAddress, client, txManager,
                                 BigInteger.valueOf(0),
                                 DEFAULT_GAS_LIMIT).setb(BigInteger.valueOf(value)).flowable().toObservable();
                         case "setc":
-                            return Storeb.load(contractAddress, client, txManager,
+                            return Storeb2.load(contractAddress, client, txManager,
                                 BigInteger.valueOf(0),
                                 DEFAULT_GAS_LIMIT).setc(BigInteger.valueOf(value)).flowable().toObservable();
                         default:
@@ -436,7 +436,7 @@ public class ContractService extends AbstractService {
                 case "storec":
                     switch (methodName.toLowerCase().trim()) {
                         case "setc":
-                            return Storec.load(contractAddress, client, txManager,
+                            return Storec2.load(contractAddress, client, txManager,
                                 BigInteger.valueOf(0),
                                 DEFAULT_GAS_LIMIT).setc(BigInteger.valueOf(value)).flowable().toObservable();
                         default:
@@ -481,11 +481,14 @@ public class ContractService extends AbstractService {
                     DEFAULT_GAS_LIMIT, BigInteger.valueOf(initalValue), dpContractAddress).flowable().toObservable();
 
             case "storeb":
-                String encodedConstructorB = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.web3j.abi.datatypes.generated.Uint256(initalValue), new org.web3j.abi.datatypes.Address(dpContractAddress)));
-                return deployRemoteCall(Storeb.class, client, transactionManager, BigInteger.valueOf(0), DEFAULT_GAS_LIMIT, Storeb.BINARY, encodedConstructorB).flowable().toObservable();
+                return Storeb2.deploy(
+                    client,
+                    transactionManager,
+                    BigInteger.valueOf(0),
+                    DEFAULT_GAS_LIMIT, BigInteger.valueOf(initalValue), dpContractAddress).flowable().toObservable();
             case "storec":
                 String encodedConstructorC = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.web3j.abi.datatypes.generated.Uint256(initalValue)));
-                return deployRemoteCall(Storec.class, client, transactionManager, BigInteger.valueOf(0), DEFAULT_GAS_LIMIT, Storec.BINARY, encodedConstructorC).flowable().toObservable();
+                return deployRemoteCall(Storec2.class, client, transactionManager, BigInteger.valueOf(0), DEFAULT_GAS_LIMIT, Storec2.BINARY, encodedConstructorC).flowable().toObservable();
             default:
                 throw new RuntimeException("invalid contract name " + contractName);
         }

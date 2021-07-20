@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.6.0;
 
-interface Storeb {
+interface Storeb2 {
     function setb(uint x) external;
 
     function setc(uint x) external;
@@ -13,11 +13,11 @@ interface Storeb {
 
 contract Storea {
     uint private storedValue;
-    Storeb anotherStorage;
+    Storeb2 anotherStorage;
 
     constructor (uint initVal, address _addrb) public {
         storedValue = initVal;
-        anotherStorage = Storeb(_addrb);
+        anotherStorage = Storeb2(_addrb);
     }
 
     function geta() public view returns (uint) {
